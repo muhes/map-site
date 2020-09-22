@@ -112,7 +112,6 @@ class MapComponent extends React.Component {
     render() {
         return (
             <div>
-        <Button color="primary" onClick = {() => this.search()}>load</Button>
         <Button color="success" onClick = {() => this.save()}> save</Button>
         <LoadScript
        googleMapsApiKey={process.env.API_KEY}>
