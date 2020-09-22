@@ -1,5 +1,7 @@
 .App {
+  padding-top: 0.3%;
   text-align: center;
+  background-color: azure;
 }
 
 .App-logo {
@@ -35,4 +37,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.btn { 
+  margin:0.1%;
 }

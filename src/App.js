@@ -1,79 +1,18 @@
 import React from 'react';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import logo from './logo.svg';
-//import mapStyles from 'mapStyles'
+import { Button } from 'reactstrap';
+
 import './App.css';
 import shortid from 'shortid';
 const axios = require('axios').default;
 require('dotenv').config()
 
-//import Map from './Components/Map'
-
 const containerStyle = {
   width: '9ovw',
-  height: '90vh'
+  height: '95vh'
 };
-/*
-const options = {
-  styles: mapStyles,
-  disableDefaultUI: true,
-  zoomControl: true
-}
- */
-/*
-function MyComponent() {
-  const [map, setMap] = React.useState(null)
- 
-  const onLoad = React.useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-    setMap(map)
-  }, [])
- 
-  const onUnmount = React.useCallback(function callback(map) {
-    setMap(null)
-  }, [])
- 
-  return (
-    <LoadScript
-      googleMapsApiKey="AIzaSyCp-n6_YIG6BW6yP4KwPj65pcJYPcRkAoA"
-    >
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-      >
-        //{  Child components, such as markers, info windows, etc. }
-        <></>
-      </GoogleMap>
-    </LoadScript>
-  )
-}
 
-
- 
-export default React.memo(MyComponent)
-*/
-
-/*
-
-{selected ? ( <InfoWindow position={{lng: selected.lng, lat: selected.lat}}>
-           <div>
-             <p>
-               Hello
-             </p>
-           </div>
-         </InfoWindow>): null}
-
-setMarkers(current => [...current, {
-        lat:43.786400 ,
-        lng: -79.463089,
-        time: new Date()
-      }]) 
-
-      */
 const libraries = ["places"]
 const center = {
   lat: 43.653225,
@@ -128,7 +67,6 @@ function App() {
     })
     .then((response) => {
       const data = response.data
-      console.log(typeof(data[0].lng))
       try {
         for (var index = 0;index < response.data.length; ++index){
           setMarkers(current => [...current, {
@@ -152,9 +90,10 @@ function App() {
   
   return (
     <div className="App">
-        <input type = "text" placeholder = "name" id = "search"></input>
-        <button onClick = {() => search()}>enter</button>
-        <button onClick = {() => save()}> save</button>
+        <input type = "text" placeholder = "search" id = "search"></input>
+        <Button color="primary" onClick = {() => search()}>load</Button>
+        <Button color="success" onClick = {() => save()}> save</Button>
+
 
       <GoogleMap mapContainerStyle = {containerStyle} zoom = {8} center = {center} 
       onClick = {(event) => {setMarkers(current => [...current, {
