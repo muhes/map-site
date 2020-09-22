@@ -35,7 +35,6 @@ class MapComponent extends React.Component {
     }
 
     search = () => {
-        //const id = document.getElementById("search").value
         const {match: { params}} =  this.props
         const id = params.id
     console.log(id)
@@ -75,12 +74,7 @@ class MapComponent extends React.Component {
             path = "https://muhes-map.herokuapp.com/"
         }
 
-         console.log(this.state.markers)
-         console.log(window.location.href)
          const id = shortid.generate();
-         const url = window.location.href
-         const index = url.indexOf('/')
-         const base = url.slice(0,index+1)
          console.log(typeof(url))
         window.confirm(
             path+id)
@@ -112,7 +106,7 @@ class MapComponent extends React.Component {
     render() {
         return (
             <div>
-        <Button color="success" onClick = {() => this.save()}> save</Button>
+        <Button color="success" onClick = {() => this.save()}> Share</Button>
         <LoadScript
        googleMapsApiKey={process.env.API_KEY}>
         <GoogleMap
@@ -140,44 +134,8 @@ class MapComponent extends React.Component {
 
      </LoadScript>
           
-           
-           
         </div>
         )
     }
 }
 export default MapComponent;
-
-/*
-<GoogleMap mapContainerStyle = {containerStyle} zoom = {8} center = {center} 
-        onClick = {(event) => {setMarkers(current => [...current, {
-          lat: event.latLng.lat(),
-          lng: event.latLng.lng(),
-          time: new Date()
-        }]) 
-        }}>
-          {markers.map(marker => 
-          <Marker key ={marker.time.toISOString()} position ={{lat: marker.lat, lng: marker.lng} }
-           title = "hello" onClick = {()=> {
-             setSelected(marker)
-           }}  />)}
-           
-           
-        </GoogleMap>
-
-        */
-
-        /*
-        <GoogleMap mapContainerStyle = {containerStyle} zoom = {8} center = {center} 
-        onClick = {(event) => {this.setState(prevState => ({
-            markers : [...prevState, [{
-            lat: event.latLng.lat(),
-            lng: event.latLng.lng(),
-            time: new Date()
-            }]
-        ]
-    })
-    )}      
-}
-      >
-        */
