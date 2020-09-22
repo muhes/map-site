@@ -1,7 +1,8 @@
 import React from 'react';
-import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import MapComponent from './Components/GoogleMap'
 import logo from './logo.svg';
 import { Button } from 'reactstrap';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import './App.css';
 import shortid from 'shortid';
@@ -13,7 +14,6 @@ const containerStyle = {
   height: '95vh'
 };
 
-const libraries = ["places"]
 const center = {
   lat: 43.653225,
   lng: -79.383186,
@@ -22,14 +22,8 @@ const center = {
 
 
 function App() {
-  const {isLoaded,loadError} = useLoadScript({
-    googleMapsApiKey: process.env.API_KEY,
-    libraries,
-  })
-
-  
   const [markers, setMarkers] = React.useState([])
-  const [selected, setSelected] = React.useState([])
+    const [selected, setSelected] = React.useState([])
 
   function save() {
     
@@ -85,33 +79,17 @@ function App() {
     });
   }
 
-  if (loadError) return "Error loading maps"
-  if (!isLoaded) return "Loading Maps"
+  
   
   return (
-    <div className="App">
-        <input type = "text" placeholder = "search" id = "search"></input>
-        <Button color="primary" onClick = {() => search()}>load</Button>
-        <Button color="success" onClick = {() => save()}> save</Button>
-
-
-      <GoogleMap mapContainerStyle = {containerStyle} zoom = {8} center = {center} 
-      onClick = {(event) => {setMarkers(current => [...current, {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng(),
-        time: new Date()
-      }]) 
-      }}>
-        {markers.map(marker => 
-        <Marker key ={marker.time.toISOString()} position ={{lat: marker.lat, lng: marker.lng} }
-         title = "hello" onClick = {()=> {
-           setSelected(marker)
-         }}  />)}
-         
-         
-      </GoogleMap>
+    <Router>
+    <div className="App">        
+        <Route path="/:id" component = {MapComponent}/>
+        <Route path="/" component = {MapComponent}/>
     </div>
+    </Router>
   );
 }
 
 export default App;
+//<Route path="/:id" components = {MapComponent}/>
