@@ -10,9 +10,10 @@ function App() {
 
   return (
     <Router>
-    <div className="App">        
+    <div className="App">
+        <Route exact path="/" component = {MapComponent}/> 
         <Route path="/:id" component = {MapComponent}/>
-        <Route path="/" component = {MapComponent}/>
+        
     </div>
     </Router>
   );

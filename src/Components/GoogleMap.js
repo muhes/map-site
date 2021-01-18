@@ -1,10 +1,7 @@
 import React from 'react'
 import '../App.css'
 import shortid from 'shortid';
-
-//import LoadGoogleMaps from '../loadGoogleMaps'
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-//import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import { Button } from 'reactstrap';
 const axios = require('axios').default;
 require('dotenv').config()
@@ -18,13 +15,6 @@ const containerStyle = {
     lat: 43.653225,
     lng: -79.383186,
   }
-
-
-  //if (loadError) return "Error loading maps"
-  //if (!isLoaded) return "Loading Maps"
-
-  //const [markers, setMarkers] = React.useState([])
-    //const   [selected, setSelected] = React.useState([])
 
 class MapComponent extends React.Component {
 
@@ -75,9 +65,8 @@ class MapComponent extends React.Component {
         }
 
          const id = shortid.generate();
-         console.log(typeof(url))
-        window.confirm(
-            path+id)
+        window.prompt(
+            "Share this link: " , path+id)
         axios.post('https://desolate-temple-82822.herokuapp.com/locations', {
             id: id,
             markers: this.state.markers
@@ -89,10 +78,6 @@ class MapComponent extends React.Component {
         });
   
     }
-
-    componentDidUpdate() {
-        console.log(this.state.markers)
-  }
 
     componentDidMount() {
 
@@ -106,6 +91,8 @@ class MapComponent extends React.Component {
     render() {
         return (
             <div>
+              <h3>Map Checkpoints</h3>
+              <h5>Click on the your points then click share to get a shareable link</h5>
         <Button color="success" onClick = {() => this.save()}> Share</Button>
         <LoadScript
        googleMapsApiKey={process.env.API_KEY}>
